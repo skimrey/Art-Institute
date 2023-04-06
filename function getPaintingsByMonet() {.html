@@ -1,0 +1,32 @@
+function getPaintingsByMonet() {
+    const apiKey = 'YOUR_API_KEY_HERE';
+    const artistName = 'Claude Monet';
+    const url = `https://api.artic.edu/api/v1/artworks/search?q=${artistName}&limit=100&fields=id,title,artist_title,date_display,thumbnail`;
+
+    fetch(url, {
+            headers: {
+                'apikey': apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const paintings = data.data;
+            let paintingsHtml = '';
+            for (let i = 0; i < paintings.length; i++) {
+                const painting = paintings[i];
+                paintingsHtml += `
+                    <div>
+                        <h2>${painting.title}</h2>
+                        <img src="${painting.thumbnail.url}">
+                        <p>${painting.artist_title}</p>
+                        <p>Date: ${painting.date_display}</p>
+                    </div>
+                    <hr>
+                `;
+            }
+            document.querySelector('#paintings').innerHTML = paintingsHtml;
+        })
+        .catch(error => console.error(error));
+}
+
+getPaintingsByMonet();
