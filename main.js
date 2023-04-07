@@ -40,8 +40,6 @@ fetch(url, {
     // Get the modal
 
 const images = document.querySelectorAll("img");
-let imgIndex;
-let imgSrc;
 var modal = document.getElementById("myModal");
 var modalImg = document.getElementById("img01");
 // get images src onclick
@@ -49,11 +47,6 @@ images.forEach((img, i) => {
     img.addEventListener("click", (e) => {
         modal.style.display = "block";
         modalImg.src = e.target.src;
-        imgSrc = e.target.src;
-        imgModal(imgSrc);
-        imgIndex = i;
-        
-        console.log(imgSrc)
     });
 });
 
